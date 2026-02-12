@@ -91,7 +91,7 @@
 <body>
 
  <audio id="bg-music" loop>
-    <source src="" type="audio/mpeg">
+    <source src="audio.mpeg" type="audio/mpeg">
 </audio> 
 
 <canvas id="particle-canvas"></canvas>
@@ -123,15 +123,15 @@
         </div>
         <div class="card-scroll-wrapper">
             <div style="font-family: 'Annie Use Your Telescope'; font-size: 1.5rem; text-align: left; line-height: 1.4;">
-                <h2 style="color:var(--primary); font-family:'Shantell Sans'; margin-bottom: 10px;">My Dearest,</h2>
-                Every pearl and heart reminds me of how precious you are to me.<br><br>
-                I have a special surprise... <br><br>
-                <strong style="font-family:'Shantell Sans'; color:var(--dark-pink); font-size: 1.1rem;">THE SECRET LOCATION:</strong>
+                <h2 style="color:var(--primary); font-family:'Shantell Sans'; margin-bottom: 10px;">My Dear Love,</h2>
+                From the moment you walked into my life, everything began to feel softer, warmer, and more meaningful. You have this quiet magic about you — the way you smile, the way you care, the way you simply exist — it touches parts of my heart I never knew were waiting to be awakened. In your presence, I feel safe. In your words, I find comfort. In your love, I find home.<br><br>
+                 Every day with you feels like a blessing I never want to take for granted. You are the reason my ordinary days turn extraordinary. You are the calm in my chaos, the light in my darkest moments, and the sweetest thought that stays with me before I sleep and when I wake up. Loving you is not just a feeling — it is the most beautiful truth of my life.<br><br>
+                <strong style="font-family:'Shantell Sans'; color:var(--dark-pink); font-size: 1.1rem;">And all i want to say is:</strong>
                 
                 <div class="scratch-container">
                     <div class="scratch-box">
                         <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: white;">
-                            <span class="secret-value">ROOM 007</span>
+                            <span class="secret-value">Ich Liebe Dich</span>
                         </div>
                         <canvas id="scratch-canvas"></canvas>
                     </div>
@@ -177,6 +177,11 @@
     // --- 2. Stage 1: Shaking & Random Jump ---
     const noBtn = document.getElementById('no-btn');
     const music = document.getElementById('bg-music');
+    music.play().catch(() => {
+        // If autoplay is blocked, play on first user interaction
+        const playMusic = () => { music.play(); document.removeEventListener('click', playMusic); };
+        document.addEventListener('click', playMusic);
+    });
     
     const handleNo = (e) => {
         e.preventDefault();
@@ -194,7 +199,7 @@
     noBtn.addEventListener('click', handleNo);
 
     document.getElementById('yes-btn').onclick = () => {
-        music.play(); // Start music on click
+        // Start music on click
         nextStage(2);
     };
 
@@ -211,12 +216,13 @@
         "3.jpeg",
         "4.jpeg",
         "5.jpeg",
-        "6.jpeg",
-        "7.jpeg",
         "8.jpeg",
+        "7.jpeg",
+        "6.jpeg",
         "9.jpeg",
         "10.jpeg"
     ];
+    const aa = ["Your Presence 🤍", "Your Smile 😊", "Every Moment 🫶", "My Love 🫴", "Our World 🌎", "Our Adventures 💗", "Our Dream 🌝", "Our Inside Jokes 🙈", "Simply us 🦢", "Your Eyes 👀"];
 
     const heartPattern = [
         {x: -60, y: -110}, {x: 60, y: -110},
@@ -232,7 +238,7 @@
             const div = document.createElement('div');
             div.className = 'mini-polaroid';
             // Using the hardcoded sources
-            div.innerHTML = `<img src="${imgSources[i]}"><p>US #${i+1}</p>`;
+            div.innerHTML = `<img src="${imgSources[i]}"><p>${aa[i]}</p>`;
             div.style.transform = `translate(0,0) scale(0)`;
             gallery.appendChild(div);
             
